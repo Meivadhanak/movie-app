@@ -9,3 +9,19 @@ body {
   color: #fff;
   font-family: Arial, sans-serif;
 }
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background: #000;
+}
+
+nav input {
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    width: 250px;
+}
