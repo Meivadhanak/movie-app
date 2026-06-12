@@ -10,18 +10,206 @@ body {
   font-family: Arial, sans-serif;
 }
 
+// Nav
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 32px;
-    background: #000;
-}
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background: #000;
 
-nav input {
-    padding: 8px;
+  h1 {
+    color: #e50914;
+    font-size: 24px;
+    letter-spacing: 1px;
+  }
+
+  input {
+    padding: 8px 12px;
     border-radius: 4px;
     border: none;
     outline: none;
     width: 250px;
+    background: #333;
+    color: #fff;
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+}
+
+// Hero
+.hero {
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.5);
+  }
+
+  .hero-info {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+
+    h2 {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: #ccc;
+      max-width: 400px;
+    }
+
+    button {
+      padding: 10px 24px;
+      background: #e50914;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1px;
+
+      &:hover {
+        background: #b20710;
+      }
+    }
+  }
+}
+
+// Movie Grid
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 32px;
+
+  .movie-card {
+    background: #1f1f1f;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    h3 {
+      padding: 8px 12px 4px;
+      font-size: 14px;
+    }
+
+    p {
+      padding: 0 12px 12px;
+      color: #f5c518;
+      font-size: 13px;
+    }
+  }
+}
+
+// Movie Detail
+.movie-detail {
+    .movie-backdrop {
+        img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.4);
+        }
+    }
+
+    .movie-detail-content {
+        display: flex;
+        gap: 40px;
+        padding: 40px 32px;
+        margin-top: -80px;
+        position: relative;
+
+        .movie-poster img {
+            width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        .movie-info {
+            padding-top: 80px;
+
+            h2 {
+                font-size: 36px;
+                margin-bottom: 8px;
+            }
+
+            .tagline {
+                color: #aaa;
+                font-style: italic;
+                margin-bottom: 16px;
+            }
+
+            .meta {
+                display: flex;
+                gap: 16px;
+                margin-bottom: 16px;
+
+                span {
+                    color: #ccc;
+                    font-size: 14px;
+                }
+
+                .rating {
+                    color: #f5c518;
+                }
+            }
+
+            .overview {
+                color: #ccc;
+                line-height: 1.7;
+                max-width: 600px;
+                margin-bottom: 20px;
+            }
+
+            .genres {
+                display: flex;
+                gap: 8px;
+                margin-bottom: 24px;
+
+                span {
+                    padding: 4px 12px;
+                    border: 1px solid #555;
+                    border-radius: 20px;
+                    font-size: 13px;
+                    color: #ccc;
+                }
+            }
+
+            .watchlist-btn {
+                padding: 12px 28px;
+                background: #e50914;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: bold;
+
+                &:hover {
+                    background: #b20710;
+                }
+            }
+        }
+    }
 }
