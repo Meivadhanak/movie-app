@@ -229,3 +229,30 @@ nav {
         }
     }
 }
+
+// Watchlist Page
+.watchlist-page {
+    padding: 32px;
+
+    h2 {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+
+    .movie-card .remove-btn {
+        display: block;
+        width: calc(100% - 24px);
+        margin: 0 12px 12px;
+        padding: 8px;
+        background: transparent;
+        color: #e50914;
+        border: 1px solid #e50914;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background: #e50914;
+            color: #fff;
+        }
+    }
+}
