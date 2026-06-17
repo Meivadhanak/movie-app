@@ -11,3 +11,12 @@ searchInput.addEventListener('keypress', (e) => {
         }
     }
 });
+
+// Make movie cards clickable
+const movieCards = document.querySelectorAll('.movie-card');
+
+movieCards.forEach(card => {
+    card.addEventListener('click', () => {
+        window.location.href = 'movie.html';
+    });
+});
