@@ -256,3 +256,20 @@ nav {
         }
     }
 }
+// Footer
+footer {
+    text-align: center;
+    padding: 24px;
+    background: #000;
+    color: #777;
+    margin-top: 40px;
+
+    p {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+}
+
+nav h1 {
+    cursor: pointer;
+}

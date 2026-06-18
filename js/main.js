@@ -20,3 +20,9 @@ movieCards.forEach(card => {
         window.location.href = 'movie.html';
     });
 });
+
+// Logo click goes home
+const logo = document.querySelector('nav h1');
+logo.addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
