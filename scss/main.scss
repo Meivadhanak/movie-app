@@ -273,3 +273,15 @@ footer {
 nav h1 {
     cursor: pointer;
 }
+
+.back-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+
+    &:hover {
+        color: #fff;
+    }
+}
