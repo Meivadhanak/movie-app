@@ -39,3 +39,41 @@ function displayMovies(movies) {
 }
 
 getPopularMovies();
+
+async function getPopularMovies() {
+    const res = await fetch(BASE_URL + '/movie/popular?api_key=' + API_KEY);
+    const data = await res.json();
+    heroMovies = data.results;
+    displayHero(heroMovies[0]);
+    displayMovies(data.results);
+}
+
+function displayHero(movie) {
+    const hero = document.querySelector('.hero img');
+    const heroTitle = document.querySelector('.hero-info h2');
+    const heroDesc = document.querySelector('.hero-info p');
+
+    hero.src = 'https://image.tmdb.org/t/p/original' + movie.backdrop_path;
+    heroTitle.textContent = movie.title;
+    heroDesc.textContent = movie.overview;
+}
+
+
+let heroMovies = [];
+let heroIndex = 0;
+
+function displayHero(movie) {
+    document.getElementById('hero-img').src = 'https://image.tmdb.org/t/p/original' + movie.backdrop_path;
+    document.getElementById('hero-title').textContent = movie.title;
+    document.getElementById('hero-desc').textContent = movie.overview;
+}
+
+document.querySelector('.hero-prev').addEventListener('click', function() {
+    heroIndex = (heroIndex - 1 + heroMovies.length) % heroMovies.length;
+    displayHero(heroMovies[heroIndex]);
+});
+
+document.querySelector('.hero-next').addEventListener('click', function() {
+    heroIndex = (heroIndex + 1) % heroMovies.length;
+    displayHero(heroMovies[heroIndex]);
+});
