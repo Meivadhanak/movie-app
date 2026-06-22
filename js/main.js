@@ -41,13 +41,14 @@ function displayMovies(movies) {
 getPopularMovies();
 
 async function getPopularMovies() {
+    document.getElementById('spinner').classList.add('active');
     const res = await fetch(BASE_URL + '/movie/popular?api_key=' + API_KEY);
     const data = await res.json();
+    document.getElementById('spinner').classList.remove('active');
     heroMovies = data.results;
     displayHero(heroMovies[0]);
     displayMovies(data.results);
 }
-
 function displayHero(movie) {
     const hero = document.querySelector('.hero img');
     const heroTitle = document.querySelector('.hero-info h2');
