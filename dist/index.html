@@ -8,56 +8,48 @@
 </head>
 <body>
     <nav>
-    <div class="nav-left">
-        <button class="menu-btn">☰</button>
-        <h1>MovieApp</h1>
+        <div class="nav-left">
+            <button class="menu-btn">☰</button>
+            <h1>MovieApp</h1>
+        </div>
+        <div class="nav-center">
+            <input type="text" placeholder="Search Movie">
+        </div>
+        <div class="nav-right">
+            <select class="lang-select">
+                <option value="en">EN</option>
+                <option value="km">KM</option>
+                <option value="hu">HU</option>
+            </select>
+            <button class="signin-btn">Sign In</button>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <img id="hero-img" src="https://placehold.co/1280x500" alt="Featured Movie">
+        <div class="hero-info">
+            <h2 id="hero-title">Featured Movie Title</h2>
+            <p id="hero-desc">A short description of the movie goes here.</p>
+            <button>Watch Now</button>
+        </div>
+        <button class="hero-prev">&#8249;</button>
+        <button class="hero-next">&#8250;</button>
     </div>
-    <div class="nav-center">
-        <input type="text" placeholder="Search Movie">
-    </div>
-    <div class="nav-right">
-        <select class="lang-select">
-            <option value="en">EN</option>
-            <option value="km">KM</option>
-            <option value="hu">HU</option>
-        </select>
-        <button class="signin-btn">Sign In</button>
-    </div>
-</nav>
-<div class="hero">
-    <img id="hero-img" src="https://placehold.co/1280x500" alt="Featured Movie">
-    <div class="hero-info">
-        <h2 id="hero-title">Featured Movie Title</h2>
-        <p id="hero-desc">A short description of the movie goes here.</p>
-        <button>Watch Now</button>
-    </div>
-    <button class="hero-prev">&#8249;</button>
-    <button class="hero-next">&#8250;</button>
-</div>
-    
+
     <h2 class="section-title">Popular Movies</h2>
     <div class="spinner" id="spinner"></div>
-    <div class="movie-grid">
-        <div class="movie-card">
-            <img src="https://placehold.co/200x300" alt="Movie Poster">
-            <h3>Movie Title</h3>
-            <p>rating: 8.5</p>
-        </div>
-        <div class="movie-card">
-            <img src="https://placehold.co/200x300" alt="Movie Poster">
-            <h3>Movie Title</h3>
-            <p>rating: 9</p>
-        </div>
-        <div class="movie-card">
-            <img src="https://placehold.co/200x300" alt="Movie Poster">
-            <h3>Movie Title</h3>
-            <p>rating: 7</p>
-        </div>
-    </div>
+    <div class="movie-grid" id="movie-grid"></div>
+
+    <h2 class="section-title">Now Playing</h2>
+    <div class="movie-grid" id="now-playing-grid"></div>
+
+    <h2 class="section-title">Top Rated</h2>
+    <div class="movie-grid" id="top-rated-grid"></div>
+
     <footer>
-    <p>&copy; 2026 MovieApp. All rights reserved.</p>
-    <p>Powered by TMDB</p>
-</footer>
+        <p>&copy; 2026 MovieApp. All rights reserved.</p>
+        <p>Powered by TMDB</p>
+    </footer>
     <script src="../js/main.js"></script>
 </body>
 </html>
