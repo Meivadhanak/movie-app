@@ -34,15 +34,16 @@ function getQueryParam(name) {
 }
 
 function createMovieCard(movie, gridId) {
+    const posterSrc = movie.poster_path ? `${IMG_URL}${movie.poster_path}` : 'https://placehold.co/200x300';
     const card = document.createElement('div');
     card.className = 'movie-card';
     card.innerHTML = `
-        <img src="${IMG_URL}${movie.poster_path}" alt="${movie.title}">
+        <img src="${posterSrc}" alt="${movie.title}">
         <h3>${movie.title}</h3>
         <p>rating: ${movie.vote_average}</p>
     `;
 
-    if (gridId === 'movie-grid') {
+    if (gridId === 'movie-grid' || gridId === 'search-results') {
         card.style.cursor = 'pointer';
         card.addEventListener('click', function() {
             window.location.href = `movie.html?id=${movie.id}`;
@@ -86,6 +87,33 @@ async function getTopRated() {
     const res = await fetch(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}`);
     const data = await res.json();
     displayMovies(data.results, 'top-rated-grid');
+}
+
+async function searchMovies(query) {
+    const resultsGrid = document.getElementById('search-results');
+    const searchTitle = document.getElementById('search-term');
+
+    if (!resultsGrid) return;
+
+    resultsGrid.innerHTML = '<p>Loading...</p>';
+
+    const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
+    const data = await res.json();
+
+    if (searchTitle) {
+        searchTitle.textContent = `"${query}"`;
+    }
+
+    if (!data.results || data.results.length === 0) {
+        resultsGrid.innerHTML = '<p>No movies found.</p>';
+        return;
+    }
+
+    resultsGrid.innerHTML = '';
+    data.results.forEach(function(movie) {
+        const card = createMovieCard(movie, 'search-results');
+        resultsGrid.appendChild(card);
+    });
 }
 
 function displayHero(movie) {
@@ -160,6 +188,15 @@ function init() {
         getPopularMovies();
         getNowPlaying();
         getTopRated();
+    }
+
+    if (window.location.pathname.endsWith('search.html')) {
+        const query = getQueryParam('q') || 'Avengers';
+        const searchInput = document.querySelector('nav input');
+        if (searchInput) {
+            searchInput.value = query;
+        }
+        searchMovies(query);
     }
 
     if (window.location.pathname.endsWith('movie.html')) {
