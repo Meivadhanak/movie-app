@@ -24,6 +24,8 @@ const API_KEY = 'd56d8a35a43ccd732c7924b5e8231823';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const BACKDROP_URL = 'https://image.tmdb.org/t/p/original';
+const FALLBACK_IMAGE = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="200" height="300"><rect width="100%" height="100%" fill="#111111"/><text x="50%" y="50%" font-size="20" text-anchor="middle" fill="#ffffff">No Poster</text></svg>');
+const FALLBACK_BACKDROP = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="500"><rect width="100%" height="100%" fill="#111111"/><text x="50%" y="50%" font-size="28" text-anchor="middle" fill="#ffffff">No Backdrop</text></svg>');
 
 let heroMovies = [];
 let heroIndex = 0;
@@ -33,8 +35,23 @@ function getQueryParam(name) {
     return params.get(name);
 }
 
+function setImageWithFallback(img, path, fallbackUrl) {
+    if (!img) return;
+
+    if (path) {
+        img.src = path;
+    } else {
+        img.src = fallbackUrl;
+    }
+
+    img.onerror = function() {
+        this.onerror = null;
+        this.src = fallbackUrl;
+    };
+}
+
 function createMovieCard(movie, gridId) {
-    const posterSrc = movie.poster_path ? `${IMG_URL}${movie.poster_path}` : 'https://placehold.co/200x300';
+    const posterSrc = movie.poster_path ? `${IMG_URL}${movie.poster_path}` : FALLBACK_IMAGE;
     const card = document.createElement('div');
     card.className = 'movie-card';
     card.innerHTML = `
@@ -42,6 +59,19 @@ function createMovieCard(movie, gridId) {
         <h3>${movie.title}</h3>
         <p>rating: ${movie.vote_average}</p>
     `;
+
+    const img = card.querySelector('img');
+    if (img) {
+        img.onload = function() {
+            if (!this.naturalWidth || !this.naturalHeight) {
+                this.src = FALLBACK_IMAGE;
+            }
+        };
+        img.onerror = function() {
+            this.onerror = null;
+            this.src = FALLBACK_IMAGE;
+        };
+    }
 
     if (gridId === 'movie-grid' || gridId === 'search-results') {
         card.style.cursor = 'pointer';
@@ -122,7 +152,10 @@ function displayHero(movie) {
     const heroTitle = document.getElementById('hero-title');
     const heroDesc = document.getElementById('hero-desc');
 
-    if (heroImg) heroImg.src = BACKDROP_URL + movie.backdrop_path;
+    if (heroImg) {
+        const backdropPath = movie.backdrop_path ? BACKDROP_URL + movie.backdrop_path : FALLBACK_BACKDROP;
+        setImageWithFallback(heroImg, backdropPath, FALLBACK_BACKDROP);
+    }
     if (heroTitle) heroTitle.textContent = movie.title;
     if (heroDesc) heroDesc.textContent = movie.overview;
 }
@@ -163,8 +196,14 @@ async function loadMovieDetail() {
     const overview = document.querySelector('.movie-info .overview');
     const genres = document.querySelector('.movie-info .genres');
 
-    if (backdrop) backdrop.src = BACKDROP_URL + movie.backdrop_path;
-    if (poster) poster.src = IMG_URL + movie.poster_path;
+    if (backdrop) {
+        const backdropPath = movie.backdrop_path ? BACKDROP_URL + movie.backdrop_path : FALLBACK_BACKDROP;
+        setImageWithFallback(backdrop, backdropPath, FALLBACK_BACKDROP);
+    }
+    if (poster) {
+        const posterPath = movie.poster_path ? IMG_URL + movie.poster_path : FALLBACK_IMAGE;
+        setImageWithFallback(poster, posterPath, FALLBACK_IMAGE);
+    }
     if (title) title.textContent = movie.title;
     if (tagline) tagline.textContent = movie.tagline || movie.status || '';
     if (rating) rating.textContent = `⭐ ${movie.vote_average}`;
