@@ -185,7 +185,6 @@ async function loadMovieDetail() {
 
     const res = await fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`);
     const movie = await res.json();
-
     const backdrop = document.querySelector('.movie-backdrop img');
     const poster = document.querySelector('.movie-poster img');
     const title = document.querySelector('.movie-info h2');
@@ -220,8 +219,26 @@ async function loadMovieDetail() {
     }
 }
 
+// Commit note helper: injects a small badge showing today's date for quick commits
+function getTodayISO() {
+    const d = new Date();
+    return d.toISOString().slice(0,10);
+}
+
+function injectCommitNote() {
+    if (!document || !document.body) return;
+    const existing = document.getElementById('commit-note');
+    if (existing) return;
+    const note = document.createElement('div');
+    note.id = 'commit-note';
+    note.textContent = `Updated: ${getTodayISO()}`;
+    document.body.appendChild(note);
+    console.info('Commit note injected:', getTodayISO());
+}
+
 function init() {
     setupHeroControls();
+    injectCommitNote();
 
     if (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || window.location.pathname.endsWith('dist')) {
         getPopularMovies();
