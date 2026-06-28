@@ -231,7 +231,7 @@ function injectCommitNote() {
     if (existing) return;
     const note = document.createElement('div');
     note.id = 'commit-note';
-    note.textContent = `Updated: ${getTodayISO()}`;
+    note.textContent = `Updated today: ${getTodayISO()}`;
     document.body.appendChild(note);
     console.info('Commit note injected:', getTodayISO());
 }
