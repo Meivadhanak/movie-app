@@ -2,11 +2,12 @@
 const searchInput = document.querySelector('nav input');
 
 if (searchInput) {
-    searchInput.addEventListener('keypress', function(e) {
+    searchInput.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
+            e.preventDefault();
             const query = searchInput.value.trim();
             if (query) {
-                window.location.href = 'search.html?q=' + query;
+                window.location.href = 'search.html?q=' + encodeURIComponent(query);
             }
         }
     });
