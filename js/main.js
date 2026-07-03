@@ -96,29 +96,56 @@ function displayMovies(movies, gridId) {
     });
 }
 
+function displayError(message, gridId) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    grid.innerHTML = `<div class="error-message">${message}</div>`;
+}
+
 async function getPopularMovies() {
     const spinner = document.getElementById('spinner');
     if (spinner) spinner.classList.add('active');
 
-    const res = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
-    const data = await res.json();
+    try {
+        const res = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
+        if (!res.ok) throw new Error('Unable to fetch popular movies');
+        const data = await res.json();
 
-    if (spinner) spinner.classList.remove('active');
-    heroMovies = data.results;
-    displayHero(heroMovies[0]);
-    displayMovies(data.results, 'movie-grid');
+        heroMovies = data.results || [];
+        if (heroMovies.length) {
+            displayHero(heroMovies[0]);
+        }
+        displayMovies(data.results || [], 'movie-grid');
+    } catch (error) {
+        displayError('Unable to load popular movies. Please refresh the page or try again later.', 'movie-grid');
+        console.error('Popular movies fetch failed:', error);
+    } finally {
+        if (spinner) spinner.classList.remove('active');
+    }
 }
 
 async function getNowPlaying() {
-    const res = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}`);
-    const data = await res.json();
-    displayMovies(data.results, 'now-playing-grid');
+    try {
+        const res = await fetch(`${BASE_URL}/movie/now_playing?api_key=${API_KEY}`);
+        if (!res.ok) throw new Error('Unable to fetch now playing movies');
+        const data = await res.json();
+        displayMovies(data.results || [], 'now-playing-grid');
+    } catch (error) {
+        displayError('Unable to load now playing movies right now.', 'now-playing-grid');
+        console.error('Now playing fetch failed:', error);
+    }
 }
 
 async function getTopRated() {
-    const res = await fetch(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}`);
-    const data = await res.json();
-    displayMovies(data.results, 'top-rated-grid');
+    try {
+        const res = await fetch(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}`);
+        if (!res.ok) throw new Error('Unable to fetch top rated movies');
+        const data = await res.json();
+        displayMovies(data.results || [], 'top-rated-grid');
+    } catch (error) {
+        displayError('Unable to load top rated movies right now.', 'top-rated-grid');
+        console.error('Top rated fetch failed:', error);
+    }
 }
 
 async function searchMovies(query) {
@@ -129,23 +156,29 @@ async function searchMovies(query) {
 
     resultsGrid.innerHTML = '<p>Loading...</p>';
 
-    const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
-    const data = await res.json();
+    try {
+        const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
+        if (!res.ok) throw new Error('Unable to fetch search results');
+        const data = await res.json();
 
-    if (searchTitle) {
-        searchTitle.textContent = `"${query}"`;
+        if (searchTitle) {
+            searchTitle.textContent = `"${query}"`;
+        }
+
+        if (!data.results || data.results.length === 0) {
+            resultsGrid.innerHTML = '<p>No movies found.</p>';
+            return;
+        }
+
+        resultsGrid.innerHTML = '';
+        data.results.forEach(function(movie) {
+            const card = createMovieCard(movie, 'search-results');
+            resultsGrid.appendChild(card);
+        });
+    } catch (error) {
+        displayError('Search failed. Please check your connection and try again.', 'search-results');
+        console.error('Search fetch failed:', error);
     }
-
-    if (!data.results || data.results.length === 0) {
-        resultsGrid.innerHTML = '<p>No movies found.</p>';
-        return;
-    }
-
-    resultsGrid.innerHTML = '';
-    data.results.forEach(function(movie) {
-        const card = createMovieCard(movie, 'search-results');
-        resultsGrid.appendChild(card);
-    });
 }
 
 function displayHero(movie) {
@@ -185,8 +218,20 @@ async function loadMovieDetail() {
     const movieId = getQueryParam('id');
     if (!movieId) return;
 
-    const res = await fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`);
-    const movie = await res.json();
+    let movie;
+    try {
+        const res = await fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`);
+        if (!res.ok) throw new Error('Unable to fetch movie details');
+        movie = await res.json();
+    } catch (error) {
+        console.error('Movie detail fetch failed:', error);
+        const content = document.querySelector('.movie-detail-content');
+        if (content) {
+            content.innerHTML = '<p class="error-message">Unable to load movie details. Please refresh or try again later.</p>';
+        }
+        return;
+    }
+
     const backdrop = document.querySelector('.movie-backdrop img');
     const poster = document.querySelector('.movie-poster img');
     const title = document.querySelector('.movie-info h2');

@@ -387,6 +387,17 @@ footer {
     box-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
+.error-message {
+    padding: 24px;
+    margin: 24px 32px;
+    color: #fff;
+    background: #2a1212;
+    border: 1px solid #bb2124;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 15px;
+}
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
