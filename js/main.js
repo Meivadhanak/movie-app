@@ -199,17 +199,21 @@ function setupHeroControls() {
     const prev = document.querySelector('.hero-prev');
     const next = document.querySelector('.hero-next');
 
+    const changeHero = function(delta) {
+        if (!heroMovies.length) return;
+        heroIndex = (heroIndex + delta + heroMovies.length) % heroMovies.length;
+        displayHero(heroMovies[heroIndex]);
+    };
+
     if (prev) {
         prev.addEventListener('click', function() {
-            heroIndex = (heroIndex - 1 + heroMovies.length) % heroMovies.length;
-            displayHero(heroMovies[heroIndex]);
+            changeHero(-1);
         });
     }
 
     if (next) {
         next.addEventListener('click', function() {
-            heroIndex = (heroIndex + 1) % heroMovies.length;
-            displayHero(heroMovies[heroIndex]);
+            changeHero(1);
         });
     }
 }
@@ -258,7 +262,7 @@ async function loadMovieDetail() {
     if (overview) overview.textContent = movie.overview;
     if (genres) {
         genres.innerHTML = '';
-        movie.genres.forEach(function(genre) {
+        (movie.genres || []).forEach(function(genre) {
             const span = document.createElement('span');
             span.textContent = genre.name;
             genres.appendChild(span);
