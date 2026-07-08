@@ -287,9 +287,36 @@ function injectCommitNote() {
     console.info('Commit note injected:', getTodayISO());
 }
 
+// Back-to-top helper: injects a floating button that scrolls smoothly to top
+function injectBackToTop() {
+    if (!document || !document.body) return;
+    if (document.getElementById('back-to-top')) return;
+    const btn = document.createElement('button');
+    btn.id = 'back-to-top';
+    btn.textContent = 'Back to top';
+    btn.title = 'Scroll to top';
+    btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.body.appendChild(btn);
+
+    const toggle = function() {
+        if (window.scrollY > 200) {
+            btn.classList.add('show');
+        } else {
+            btn.classList.remove('show');
+        }
+    };
+
+    window.addEventListener('scroll', toggle);
+    // initial visibility
+    toggle();
+}
+
 function init() {
     setupHeroControls();
     injectCommitNote();
+    injectBackToTop();
 
     if (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || window.location.pathname.endsWith('dist')) {
         getPopularMovies();
