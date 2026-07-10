@@ -193,6 +193,16 @@ function displayHero(movie) {
     }
     if (heroTitle) heroTitle.textContent = movie.title;
     if (heroDesc) heroDesc.textContent = movie.overview;
+
+    const heroWatchBtn = document.getElementById('hero-watch-btn');
+    if (heroWatchBtn) {
+        heroWatchBtn.disabled = !movie.id;
+        heroWatchBtn.onclick = function() {
+            if (movie.id) {
+                window.location.href = `movie.html?id=${movie.id}`;
+            }
+        };
+    }
 }
 
 function setupHeroControls() {
