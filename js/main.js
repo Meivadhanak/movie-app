@@ -278,6 +278,58 @@ async function loadMovieDetail() {
             genres.appendChild(span);
         });
     }
+
+    setupWatchlistButton(movie);
+}
+
+function getWatchlist() {
+    try {
+        return JSON.parse(localStorage.getItem('movieapp-watchlist') || '[]');
+    } catch (err) {
+        return [];
+    }
+}
+
+function saveWatchlist(list) {
+    localStorage.setItem('movieapp-watchlist', JSON.stringify(list));
+}
+
+function setupWatchlistButton(movie) {
+    const button = document.getElementById('watchlist-toggle-btn');
+    if (!button || !movie || !movie.id) return;
+
+    const list = getWatchlist();
+    const isInWatchlist = list.some(function(item) {
+        return item.id === movie.id;
+    });
+
+    const updateButton = function(inWatchlist) {
+        button.textContent = inWatchlist ? '✔ In Watchlist' : '+ Add to Watchlist';
+        button.title = inWatchlist ? 'Remove from watchlist' : 'Add to watchlist';
+    };
+
+    updateButton(isInWatchlist);
+
+    button.onclick = function() {
+        const currentList = getWatchlist();
+        const hasMovie = currentList.some(function(item) {
+            return item.id === movie.id;
+        });
+
+        if (hasMovie) {
+            saveWatchlist(currentList.filter(function(item) {
+                return item.id !== movie.id;
+            }));
+            updateButton(false);
+        } else {
+            saveWatchlist(currentList.concat([{
+                id: movie.id,
+                title: movie.title,
+                poster_path: movie.poster_path
+            }]));
+            updateButton(true);
+        }
+    };
 }
 
 // Commit note helper: injects a small badge showing today's date for quick commits
