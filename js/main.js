@@ -344,9 +344,9 @@ function injectCommitNote() {
     if (existing) return;
     const note = document.createElement('div');
     note.id = 'commit-note';
-    note.textContent = `Updated today: ${getTodayISO()}`;
+    note.textContent = `Updated today: ${COMMIT_DATE}`;
     document.body.appendChild(note);
-    console.info('Commit note injected:', getTodayISO());
+    console.info('Commit note injected:', COMMIT_DATE);
 }
 
 // Back-to-top helper: injects a floating button that scrolls smoothly to top
