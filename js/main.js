@@ -56,6 +56,9 @@ function createMovieCard(movie, gridId) {
     const posterSrc = movie.poster_path ? `${IMG_URL}${movie.poster_path}` : FALLBACK_IMAGE;
     const card = document.createElement('div');
     card.className = 'movie-card';
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `Open details for ${movie.title}`);
+    card.tabIndex = 0;
     card.innerHTML = `
         <img src="${posterSrc}" alt="${movie.title}">
         <h3>${movie.title}</h3>
@@ -79,6 +82,12 @@ function createMovieCard(movie, gridId) {
         card.style.cursor = 'pointer';
         card.addEventListener('click', function() {
             window.location.href = `movie.html?id=${movie.id}`;
+        });
+        card.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                window.location.href = `movie.html?id=${movie.id}`;
+            }
         });
     }
 
@@ -340,8 +349,20 @@ function getTodayISO() {
 
 function injectCommitNote() {
     if (!document || !document.body) return;
+
+    const footerNote = document.querySelector('.commit-note');
+    if (footerNote) {
+        footerNote.id = 'commit-note';
+        footerNote.textContent = `Updated today: ${COMMIT_DATE}`;
+        return;
+    }
+
     const existing = document.getElementById('commit-note');
-    if (existing) return;
+    if (existing) {
+        existing.textContent = `Updated today: ${COMMIT_DATE}`;
+        return;
+    }
+
     const note = document.createElement('div');
     note.id = 'commit-note';
     note.textContent = `Updated today: ${COMMIT_DATE}`;

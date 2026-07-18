@@ -1,0 +1,353 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #141414;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background: #000;
+}
+nav .nav-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+nav .nav-left h1 {
+  color: #e50914;
+  font-size: 24px;
+  cursor: pointer;
+  display: inline;
+}
+nav .nav-left .menu-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+nav .nav-center input {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  width: 350px;
+  background: #333;
+  color: #fff;
+  font-size: 16px;
+}
+nav .nav-center input::placeholder {
+  color: #aaa;
+}
+nav .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+nav .nav-right .lang-select {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+nav .nav-right .watchlist-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  background: #e50914;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+nav .nav-right .watchlist-link:hover {
+  background: #b20710;
+}
+nav .nav-right .signin-btn {
+  padding: 8px 20px;
+  background: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+nav .nav-right .signin-btn:hover {
+  background: #b20710;
+}
+
+.hero {
+  position: relative;
+}
+.hero img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.5);
+}
+.hero .hero-info {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+}
+.hero .hero-info h2 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+.hero .hero-info p {
+  margin-bottom: 16px;
+  color: #ccc;
+  max-width: 400px;
+}
+.hero .hero-info button {
+  padding: 10px 24px;
+  background: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.hero .hero-info button:hover {
+  background: #b20710;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 32px;
+}
+.movie-grid .movie-card {
+  background: #1f1f1f;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.movie-grid .movie-card:hover {
+  transform: scale(1.03);
+}
+.movie-grid .movie-card:focus-visible {
+  outline: 2px solid #e50914;
+  outline-offset: 2px;
+  transform: scale(1.02);
+}
+.movie-grid .movie-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  background: #111;
+}
+.movie-grid .movie-card h3 {
+  padding: 8px 12px 4px;
+  font-size: 14px;
+}
+.movie-grid .movie-card p {
+  padding: 0 12px 12px;
+  color: #f5c518;
+  font-size: 13px;
+}
+
+.movie-detail .movie-backdrop img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.4);
+}
+.movie-detail .movie-detail-content {
+  display: flex;
+  gap: 40px;
+  padding: 40px 32px;
+  margin-top: -80px;
+  position: relative;
+}
+.movie-detail .movie-detail-content .movie-poster img {
+  width: 250px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+.movie-detail .movie-detail-content .movie-info {
+  padding-top: 80px;
+}
+.movie-detail .movie-detail-content .movie-info h2 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+.movie-detail .movie-detail-content .movie-info .tagline {
+  color: #aaa;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+.movie-detail .movie-detail-content .movie-info .meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.movie-detail .movie-detail-content .movie-info .meta span {
+  color: #ccc;
+  font-size: 14px;
+}
+.movie-detail .movie-detail-content .movie-info .meta .rating {
+  color: #f5c518;
+}
+.movie-detail .movie-detail-content .movie-info .overview {
+  color: #ccc;
+  line-height: 1.7;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+.movie-detail .movie-detail-content .movie-info .genres {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.movie-detail .movie-detail-content .movie-info .genres span {
+  padding: 4px 12px;
+  border: 1px solid #555;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #ccc;
+}
+.movie-detail .movie-detail-content .movie-info .watchlist-btn {
+  padding: 12px 28px;
+  background: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+.movie-detail .movie-detail-content .movie-info .watchlist-btn:hover {
+  background: #b20710;
+}
+
+.search-page {
+  padding: 32px;
+}
+.search-page h2 {
+  font-size: 22px;
+  color: #ccc;
+  margin-bottom: 24px;
+}
+.search-page h2 span {
+  color: #fff;
+  font-weight: bold;
+}
+
+.watchlist-page {
+  padding: 32px;
+}
+.watchlist-page h2 {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+.watchlist-page .movie-card .remove-btn {
+  display: block;
+  width: calc(100% - 24px);
+  margin: 0 12px 12px;
+  padding: 8px;
+  background: transparent;
+  color: #e50914;
+  border: 1px solid #e50914;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.watchlist-page .movie-card .remove-btn:hover {
+  background: #e50914;
+  color: #fff;
+}
+
+footer {
+  text-align: center;
+  padding: 24px;
+  background: #000;
+  color: #777;
+  margin-top: 40px;
+}
+footer p {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+}
+.back-btn:hover {
+  color: #fff;
+}
+
+.section-title {
+  padding: 32px 32px 16px;
+  font-size: 22px;
+}
+
+.hero-prev, .hero-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  font-size: 40px;
+  padding: 12px 16px;
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 4px;
+}
+.hero-prev:hover, .hero-next:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.hero-prev {
+  left: 16px;
+}
+
+.hero-next {
+  right: 16px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #333;
+  border-top: 4px solid #e50914;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 40px auto;
+  display: none;
+}
+.spinner.active {
+  display: block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
