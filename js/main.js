@@ -54,6 +54,8 @@ function setImageWithFallback(img, path, fallbackUrl) {
 
 function createMovieCard(movie, gridId) {
     const posterSrc = movie.poster_path ? `${IMG_URL}${movie.poster_path}` : FALLBACK_IMAGE;
+    const releaseYear = movie.release_date ? movie.release_date.slice(0, 4) : 'TBA';
+    const ratingValue = typeof movie.vote_average === 'number' ? movie.vote_average.toFixed(1) : 'N/A';
     const card = document.createElement('div');
     card.className = 'movie-card';
     card.setAttribute('role', 'button');
@@ -61,8 +63,13 @@ function createMovieCard(movie, gridId) {
     card.tabIndex = 0;
     card.innerHTML = `
         <img src="${posterSrc}" alt="${movie.title}">
-        <h3>${movie.title}</h3>
-        <p>rating: ${movie.vote_average}</p>
+        <div class="movie-card-content">
+            <h3>${movie.title}</h3>
+            <div class="movie-meta">
+                <span class="movie-year">${releaseYear}</span>
+                <span class="movie-rating">⭐ ${ratingValue}</span>
+            </div>
+        </div>
     `;
 
     const img = card.querySelector('img');

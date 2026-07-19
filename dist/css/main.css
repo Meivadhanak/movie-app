@@ -160,10 +160,20 @@ nav .nav-right .signin-btn:hover {
   padding: 8px 12px 4px;
   font-size: 14px;
 }
-.movie-grid .movie-card p {
+.movie-grid .movie-card .movie-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 0 12px 12px;
-  color: #f5c518;
   font-size: 13px;
+  color: #aaa;
+}
+.movie-grid .movie-card .movie-year {
+  color: #ccc;
+}
+.movie-grid .movie-card .movie-rating {
+  color: #f5c518;
+  font-weight: 600;
 }
 
 .movie-detail .movie-backdrop img {
