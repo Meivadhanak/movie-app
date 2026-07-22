@@ -86,7 +86,7 @@ function createMovieCard(movie, gridId) {
         };
     }
 
-    if (gridId === 'movie-grid' || gridId === 'search-results') {
+    if (gridId === 'movie-grid' || gridId === 'search-results' || gridId === 'watchlist-grid') {
         card.style.cursor = 'pointer';
         card.addEventListener('click', function() {
             window.location.href = `movie.html?id=${movie.id}`;
@@ -349,6 +349,47 @@ function setupWatchlistButton(movie) {
     };
 }
 
+function renderWatchlist() {
+    const watchlistGrid = document.getElementById('watchlist-grid');
+    const emptyMessage = document.getElementById('watchlist-empty-message');
+    if (!watchlistGrid) return;
+
+    const watchlist = getWatchlist();
+    watchlistGrid.innerHTML = '';
+
+    if (!watchlist.length) {
+        if (emptyMessage) {
+            emptyMessage.textContent = 'Your watchlist is empty. Search for movies and add them to your watchlist.';
+        }
+        return;
+    }
+
+    if (emptyMessage) {
+        emptyMessage.textContent = '';
+    }
+
+    watchlist.forEach(function(movie) {
+        const card = createMovieCard(movie, 'watchlist-grid');
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-btn';
+        removeBtn.textContent = 'Remove';
+        removeBtn.addEventListener('click', function(event) {
+            event.stopPropagation();
+            removeFromWatchlist(movie.id);
+        });
+        card.appendChild(removeBtn);
+        watchlistGrid.appendChild(card);
+    });
+}
+
+function removeFromWatchlist(movieId) {
+    const list = getWatchlist().filter(function(item) {
+        return item.id !== movieId;
+    });
+    saveWatchlist(list);
+    renderWatchlist();
+}
+
 // Commit note helper: injects a small badge showing today's date for quick commits
 function getTodayISO() {
     const d = new Date();
@@ -422,6 +463,10 @@ function init() {
             searchInput.value = query;
         }
         searchMovies(query);
+    }
+
+    if (window.location.pathname.endsWith('watchlist.html')) {
+        renderWatchlist();
     }
 
     if (window.location.pathname.endsWith('movie.html')) {
