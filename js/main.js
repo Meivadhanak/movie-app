@@ -311,6 +311,19 @@ function saveWatchlist(list) {
     localStorage.setItem('movieapp-watchlist', JSON.stringify(list));
 }
 
+function updateWatchlistLink() {
+    const link = document.querySelector('.watchlist-link');
+    if (!link) return;
+
+    if (!link.dataset.baseLabel) {
+        link.dataset.baseLabel = (link.textContent || 'Watchlist').trim();
+    }
+
+    const count = getWatchlist().length;
+    const baseLabel = link.dataset.baseLabel || 'Watchlist';
+    link.innerHTML = `${baseLabel}${count > 0 ? ` <span class="watchlist-count">${count}</span>` : ''}`;
+}
+
 function setupWatchlistButton(movie) {
     const button = document.getElementById('watchlist-toggle-btn');
     if (!button || !movie || !movie.id) return;
@@ -326,6 +339,7 @@ function setupWatchlistButton(movie) {
     };
 
     updateButton(isInWatchlist);
+    updateWatchlistLink();
 
     button.onclick = function() {
         const currentList = getWatchlist();
@@ -338,6 +352,7 @@ function setupWatchlistButton(movie) {
                 return item.id !== movie.id;
             }));
             updateButton(false);
+            updateWatchlistLink();
         } else {
             saveWatchlist(currentList.concat([{
                 id: movie.id,
@@ -345,6 +360,7 @@ function setupWatchlistButton(movie) {
                 poster_path: movie.poster_path
             }]));
             updateButton(true);
+            updateWatchlistLink();
         }
     };
 }
@@ -367,6 +383,8 @@ function renderWatchlist() {
     if (emptyMessage) {
         emptyMessage.textContent = '';
     }
+
+    updateWatchlistLink();
 
     watchlist.forEach(function(movie) {
         const card = createMovieCard(movie, 'watchlist-grid');
@@ -449,6 +467,7 @@ function init() {
     setupHeroControls();
     injectCommitNote();
     injectBackToTop();
+    updateWatchlistLink();
 
     if (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || window.location.pathname.endsWith('dist')) {
         getPopularMovies();

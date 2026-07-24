@@ -73,6 +73,7 @@ nav {
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
             padding: 8px 20px;
             background: #e50914;
             color: #fff;
@@ -83,6 +84,20 @@ nav {
 
             &:hover {
                 background: #b20710;
+            }
+
+            .watchlist-count {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 22px;
+                height: 22px;
+                padding: 0 6px;
+                border-radius: 999px;
+                background: #fff;
+                color: #e50914;
+                font-size: 12px;
+                font-weight: bold;
             }
         }
 
