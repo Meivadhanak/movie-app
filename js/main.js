@@ -1,5 +1,5 @@
 /// Search functionality
-// Commit note: updated for commit on 2026-07-23
+// Commit note: updated for commit on 2026-07-26
 const searchInput = document.querySelector('nav input');
 
 if (searchInput) {
