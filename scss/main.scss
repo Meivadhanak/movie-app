@@ -135,6 +135,19 @@ nav {
     bottom: 32px;
     left: 32px;
 
+    .hero-badge {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 12px;
+      background: rgba(229, 9, 20, 0.9);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
     h2 {
       font-size: 36px;
       margin-bottom: 8px;
@@ -162,6 +175,13 @@ nav {
       }
     }
   }
+}
+
+.section-title {
+  padding: 0 32px;
+  margin-top: 24px;
+  font-size: 24px;
+  color: #f5f5f5;
 }
 
 // Movie Grid
