@@ -208,8 +208,12 @@ function displayHero(movie) {
         const backdropPath = movie.backdrop_path ? BACKDROP_URL + movie.backdrop_path : FALLBACK_BACKDROP;
         setImageWithFallback(heroImg, backdropPath, FALLBACK_BACKDROP);
     }
-    if (heroTitle) heroTitle.textContent = movie.title;
-    if (heroDesc) heroDesc.textContent = movie.overview;
+
+    const titleText = movie.title && movie.title.trim() ? movie.title : 'Untitled movie';
+    const overviewText = movie.overview && movie.overview.trim() ? movie.overview : 'No overview available for this title yet.';
+
+    if (heroTitle) heroTitle.textContent = titleText;
+    if (heroDesc) heroDesc.textContent = overviewText;
 
     const heroWatchBtn = document.getElementById('hero-watch-btn');
     if (heroWatchBtn) {
