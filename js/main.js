@@ -413,12 +413,6 @@ function removeFromWatchlist(movieId) {
     renderWatchlist();
 }
 
-// Commit note helper: injects a small badge showing today's date for quick commits
-function getTodayISO() {
-    const d = new Date();
-    return d.toISOString().slice(0,10);
-}
-
 function injectCommitNote() {
     if (!document || !document.body) return;
 
