@@ -483,6 +483,34 @@ footer {
     background: #b20710;
 }
 
+.status-banner {
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: 10000;
+    padding: 10px 16px;
+    border-radius: 0 0 8px 8px;
+    font-size: 13px;
+    color: #fff;
+    background: rgba(17, 17, 17, 0.95);
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.status-banner.hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+.status-banner.online {
+    background: rgba(23, 138, 68, 0.95);
+}
+
+.status-banner.offline {
+    background: rgba(178, 33, 33, 0.95);
+}
+
 .watchlist-empty {
     color: #ddd;
     font-size: 15px;

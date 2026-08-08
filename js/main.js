@@ -462,11 +462,41 @@ function injectBackToTop() {
     toggle();
 }
 
+function showStatusBanner(message, type) {
+    if (!document || !document.body) return;
+
+    let banner = document.getElementById('status-banner');
+    if (!banner) {
+        banner = document.createElement('div');
+        banner.id = 'status-banner';
+        document.body.appendChild(banner);
+    }
+
+    banner.textContent = message;
+    banner.className = `status-banner ${type}`;
+    banner.classList.remove('hidden');
+
+    clearTimeout(showStatusBanner.hideTimer);
+    showStatusBanner.hideTimer = setTimeout(function() {
+        if (banner) banner.classList.add('hidden');
+    }, 4200);
+}
+
 function init() {
     setupHeroControls();
     injectCommitNote();
     injectBackToTop();
     updateWatchlistLink();
+    window.addEventListener('offline', function() {
+        showStatusBanner('Offline mode enabled — content may be outdated.', 'offline');
+    });
+    window.addEventListener('online', function() {
+        showStatusBanner('Back online — data is available again.', 'online');
+    });
+
+    if (!navigator.onLine) {
+        showStatusBanner('You are offline. Some content may not load.', 'offline');
+    }
 
     if (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || window.location.pathname.endsWith('dist')) {
         getPopularMovies();
