@@ -64,7 +64,7 @@ function createMovieCard(movie, gridId) {
     card.setAttribute('aria-label', `Open details for ${movie.title}`);
     card.tabIndex = 0;
     card.innerHTML = `
-        <img src="${posterSrc}" alt="${movie.title}">
+        <img src="${posterSrc}" alt="${movie.title}" loading="lazy" decoding="async">
         <div class="movie-card-content">
             <h3>${movie.title}</h3>
             <div class="movie-meta">
@@ -241,11 +241,23 @@ function setupHeroControls() {
         prev.addEventListener('click', function() {
             changeHero(-1);
         });
+        prev.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                changeHero(-1);
+            }
+        });
     }
 
     if (next) {
         next.addEventListener('click', function() {
             changeHero(1);
+        });
+        next.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                changeHero(1);
+            }
         });
     }
 }
@@ -469,6 +481,8 @@ function showStatusBanner(message, type) {
     if (!banner) {
         banner = document.createElement('div');
         banner.id = 'status-banner';
+        banner.setAttribute('role', 'status');
+        banner.setAttribute('aria-live', 'polite');
         document.body.appendChild(banner);
     }
 
