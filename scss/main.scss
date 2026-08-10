@@ -495,6 +495,7 @@ footer {
     color: #fff;
     background: rgba(17, 17, 17, 0.95);
     box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+    animation: statusFadeIn 180ms ease;
     transition: opacity 180ms ease, transform 180ms ease;
 }
 
