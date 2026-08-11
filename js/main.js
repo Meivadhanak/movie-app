@@ -33,6 +33,7 @@ const FALLBACK_BACKDROP = 'data:image/svg+xml;charset=UTF-8,' + encodeURICompone
 
 let heroMovies = [];
 let heroIndex = 0;
+let heroRotationTimer = null;
 
 function getQueryParam(name) {
     const params = new URLSearchParams(window.location.search);
@@ -199,6 +200,22 @@ async function searchMovies(query) {
     }
 }
 
+function startHeroRotation() {
+    if (!heroMovies.length || heroMovies.length < 2) return;
+    stopHeroRotation();
+    heroRotationTimer = window.setInterval(function() {
+        heroIndex = (heroIndex + 1) % heroMovies.length;
+        displayHero(heroMovies[heroIndex]);
+    }, 5000);
+}
+
+function stopHeroRotation() {
+    if (heroRotationTimer) {
+        window.clearInterval(heroRotationTimer);
+        heroRotationTimer = null;
+    }
+}
+
 function displayHero(movie) {
     if (!movie) return;
     const heroImg = document.getElementById('hero-img');
@@ -225,17 +242,27 @@ function displayHero(movie) {
             }
         };
     }
+
+    startHeroRotation();
 }
 
 function setupHeroControls() {
     const prev = document.querySelector('.hero-prev');
     const next = document.querySelector('.hero-next');
+    const hero = document.querySelector('.hero');
 
     const changeHero = function(delta) {
         if (!heroMovies.length) return;
         heroIndex = (heroIndex + delta + heroMovies.length) % heroMovies.length;
         displayHero(heroMovies[heroIndex]);
     };
+
+    if (hero) {
+        hero.addEventListener('mouseenter', stopHeroRotation);
+        hero.addEventListener('mouseleave', startHeroRotation);
+        hero.addEventListener('focusin', stopHeroRotation);
+        hero.addEventListener('focusout', startHeroRotation);
+    }
 
     if (prev) {
         prev.addEventListener('click', function() {
