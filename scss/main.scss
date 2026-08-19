@@ -545,6 +545,62 @@ footer {
     font-size: 15px;
 }
 
+@media (max-width: 768px) {
+    nav {
+        flex-wrap: wrap;
+        gap: 14px;
+        padding: 14px 16px;
+
+        .nav-center {
+            order: 3;
+            flex-basis: 100%;
+
+            input {
+                width: 100%;
+            }
+        }
+
+        .nav-right {
+            gap: 8px;
+
+            .watchlist-link,
+            .signin-btn {
+                padding: 8px 12px;
+            }
+        }
+    }
+
+    .hero {
+        img {
+            height: 360px;
+        }
+
+        .hero-info {
+            right: 16px;
+            bottom: 20px;
+            left: 16px;
+
+            h2 {
+                font-size: 28px;
+            }
+        }
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        padding: 20px 16px;
+
+        .movie-card img {
+            height: 240px;
+        }
+    }
+
+    .section-title {
+        padding: 0 16px;
+    }
+}
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
