@@ -5,6 +5,12 @@ const searchInput = document.querySelector('nav input');
 
 if (searchInput) {
     searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            searchInput.value = '';
+            searchInput.focus();
+            return;
+        }
+
         if (e.key === 'Enter') {
             e.preventDefault();
             const query = searchInput.value.trim();
