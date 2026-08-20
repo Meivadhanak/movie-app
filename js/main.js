@@ -455,6 +455,7 @@ function removeFromWatchlist(movieId) {
         return item.id !== movieId;
     });
     saveWatchlist(list);
+    updateWatchlistLink();
     renderWatchlist();
 }
 
