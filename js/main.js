@@ -29,6 +29,19 @@ if (logo) {
     });
 }
 
+const menuButton = document.querySelector('.menu-btn');
+const navRight = document.querySelector('.nav-right');
+if (menuButton && navRight) {
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-controls', 'nav-actions');
+    navRight.id = 'nav-actions';
+
+    menuButton.addEventListener('click', function() {
+        const isOpen = navRight.classList.toggle('is-open');
+        menuButton.setAttribute('aria-expanded', String(isOpen));
+    });
+}
+
 const API_KEY = 'd56d8a35a43ccd732c7924b5e8231823';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';

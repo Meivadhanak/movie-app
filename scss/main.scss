@@ -118,6 +118,25 @@ nav {
     }
 }
 
+@media (max-width: 768px) {
+    nav {
+        .nav-right {
+            display: none;
+            flex-basis: 100%;
+            justify-content: flex-end;
+
+            &.is-open {
+                display: flex;
+            }
+        }
+
+        .menu-btn {
+            min-width: 44px;
+            min-height: 44px;
+        }
+    }
+}
+
 // Hero
 .hero {
   position: relative;
