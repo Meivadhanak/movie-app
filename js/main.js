@@ -36,9 +36,28 @@ if (menuButton && navRight) {
     menuButton.setAttribute('aria-controls', 'nav-actions');
     navRight.id = 'nav-actions';
 
+    const closeMenu = function() {
+        navRight.classList.remove('is-open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open navigation menu');
+    };
+
     menuButton.addEventListener('click', function() {
         const isOpen = navRight.classList.toggle('is-open');
         menuButton.setAttribute('aria-expanded', String(isOpen));
+        menuButton.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!navRight.contains(event.target) && !menuButton.contains(event.target)) {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeMenu();
+        }
     });
 }
 
