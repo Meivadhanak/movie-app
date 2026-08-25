@@ -24,8 +24,17 @@ if (searchInput) {
 // Logo click goes home
 const logo = document.querySelector('nav h1');
 if (logo) {
+    logo.setAttribute('role', 'button');
+    logo.setAttribute('tabindex', '0');
+    logo.setAttribute('aria-label', 'Go to MovieApp home page');
     logo.addEventListener('click', function() {
         window.location.href = 'index.html';
+    });
+    logo.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            window.location.href = 'index.html';
+        }
     });
 }
 
