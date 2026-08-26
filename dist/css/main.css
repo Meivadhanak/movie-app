@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
 body {
   background: #141414;
   color: #fff;
@@ -46,6 +51,9 @@ nav .nav-center input {
   color: #fff;
   font-size: 16px;
   transition: all 0.3s ease;
+}
+nav .nav-center input:focus-visible {
+  outline-color: #e50914;
 }
 nav .nav-center input::placeholder {
   color: #aaa;
@@ -100,6 +108,9 @@ nav .nav-right .signin-btn {
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+}
+nav .nav-right .signin-btn:focus-visible {
+  outline-color: #e50914;
 }
 nav .nav-right .signin-btn:hover {
   background: #b20710;

@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
 body {
   background: #141414;
   color: #fff;
@@ -50,6 +55,10 @@ nav {
         color: #fff;
         font-size: 16px;
         transition: all 0.3s ease;
+
+        &:focus-visible {
+            outline-color: #e50914;
+        }
 
         &::placeholder {
             color: #aaa;
@@ -110,6 +119,10 @@ nav {
             border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
+
+            &:focus-visible {
+                outline-color: #e50914;
+            }
 
             &:hover {
                 background: #b20710;
