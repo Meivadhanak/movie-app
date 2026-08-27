@@ -1,6 +1,6 @@
 /// Search functionality
-// Commit note: updated for commit on 2026-08-19
-console.log('Commit: 2026-08-19');
+// Commit note: updated for commit on 2026-08-27
+console.log('Commit: 2026-08-27');
 const searchInput = document.querySelector('nav input');
 
 if (searchInput) {
