@@ -1,4 +1,4 @@
-/* Commit: updated for commit on 2026-08-19 */
+/* Commit: updated for commit on 2026-08-27 */
 * {
   margin: 0;
   padding: 0;
@@ -555,6 +555,23 @@ footer p {
   }
   .section-title {
     padding: 0 16px;
+  }
+  .movie-detail-content {
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 16px 32px;
+    margin-top: -48px;
+  }
+  .movie-detail-content .movie-poster img {
+    display: block;
+    width: min(220px, 70vw);
+    margin: 0 auto;
+  }
+  .movie-detail-content .movie-info {
+    padding-top: 0;
+  }
+  .movie-detail-content .movie-info h2 {
+    font-size: 28px;
   }
 }
 @keyframes spin {
