@@ -457,6 +457,12 @@ footer {
     &:hover {
         background: rgba(0,0,0,0.8);
     }
+
+    &:focus-visible {
+        background: rgba(0,0,0,0.8);
+        outline: 2px solid #e50914;
+        outline-offset: 2px;
+    }
 }
 
 .hero-prev { left: 16px; }
