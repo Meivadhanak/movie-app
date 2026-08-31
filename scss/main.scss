@@ -42,6 +42,13 @@ nav {
             color: #fff;
             font-size: 22px;
             cursor: pointer;
+            padding: 6px 8px;
+            border-radius: 4px;
+
+            &:focus-visible {
+                outline: 2px solid #e50914;
+                outline-offset: 2px;
+            }
         }
     }
 
