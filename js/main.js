@@ -413,6 +413,8 @@ function updateWatchlistLink() {
     const count = getWatchlist().length;
     const baseLabel = link.dataset.baseLabel || 'Watchlist';
     link.innerHTML = `${baseLabel}${count > 0 ? ` <span class="watchlist-count">${count}</span>` : ''}`;
+    link.setAttribute('aria-label', `Watchlist with ${count} item${count === 1 ? '' : 's'}`);
+    link.title = `View your watchlist (${count} item${count === 1 ? '' : 's'})`;
 }
 
 function setupWatchlistButton(movie) {
@@ -427,6 +429,8 @@ function setupWatchlistButton(movie) {
     const updateButton = function(inWatchlist) {
         button.textContent = inWatchlist ? '✔ In Watchlist' : '+ Add to Watchlist';
         button.title = inWatchlist ? 'Remove from watchlist' : 'Add to watchlist';
+        button.setAttribute('aria-pressed', String(inWatchlist));
+        button.setAttribute('aria-label', inWatchlist ? `Remove ${movie.title} from watchlist` : `Add ${movie.title} to watchlist`);
     };
 
     updateButton(isInWatchlist);
@@ -519,6 +523,7 @@ function injectCommitNote() {
     const note = document.createElement('div');
     note.id = 'commit-note';
     note.textContent = `Updated today: ${COMMIT_DATE}`;
+    note.setAttribute('aria-live', 'polite');
     document.body.appendChild(note);
     console.info('Commit note injected:', COMMIT_DATE);
 }
