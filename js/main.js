@@ -486,6 +486,9 @@ function renderWatchlist() {
         const removeBtn = document.createElement('button');
         removeBtn.className = 'remove-btn';
         removeBtn.textContent = 'Remove';
+        removeBtn.type = 'button';
+        removeBtn.setAttribute('aria-label', `Remove ${movie.title} from watchlist`);
+        removeBtn.title = `Remove ${movie.title} from watchlist`;
         removeBtn.addEventListener('click', function(event) {
             event.stopPropagation();
             removeFromWatchlist(movie.id);
