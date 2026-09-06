@@ -4,6 +4,10 @@ console.log('Commit: 2026-09-01');
 const searchInput = document.querySelector('nav input');
 
 if (searchInput) {
+    searchInput.setAttribute('aria-label', 'Search movies');
+    searchInput.setAttribute('autocomplete', 'off');
+    searchInput.setAttribute('spellcheck', 'false');
+
     searchInput.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             searchInput.value = '';
