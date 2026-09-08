@@ -511,6 +511,17 @@ function removeFromWatchlist(movieId) {
     renderWatchlist();
 }
 
+function setupWatchlistSync() {
+    window.addEventListener('storage', function(event) {
+        if (event.key !== 'movieapp-watchlist') return;
+
+        updateWatchlistLink();
+        if (window.location.pathname.endsWith('watchlist.html')) {
+            renderWatchlist();
+        }
+    });
+}
+
 function injectCommitNote() {
     if (!document || !document.body) return;
 
@@ -585,6 +596,7 @@ function showStatusBanner(message, type) {
 
 function init() {
     setupHeroControls();
+    setupWatchlistSync();
     injectCommitNote();
     injectBackToTop();
     updateWatchlistLink();
