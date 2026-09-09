@@ -1,6 +1,6 @@
 /// Search functionality
-// Commit note: updated for commit on 2026-09-01
-console.log('Commit: 2026-09-01');
+// Commit note: updated for commit on 2026-09-09
+console.log('Commit: 2026-09-09');
 const searchInput = document.querySelector('nav input');
 
 if (searchInput) {
@@ -541,7 +541,9 @@ function injectCommitNote() {
     const note = document.createElement('div');
     note.id = 'commit-note';
     note.textContent = `Updated today: ${COMMIT_DATE}`;
+    note.setAttribute('role', 'status');
     note.setAttribute('aria-live', 'polite');
+    note.title = `Movie app updated on ${COMMIT_DATE}`;
     document.body.appendChild(note);
     console.info('Commit note injected:', COMMIT_DATE);
 }
