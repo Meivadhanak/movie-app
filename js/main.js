@@ -1,6 +1,6 @@
 /// Search functionality
-// Commit note: updated for commit on 2026-09-23
-console.log('Commit: 2026-09-23');
+// Commit note: updated for commit on 2026-09-24
+console.log('Commit: 2026-09-24');
 const searchInput = document.querySelector('nav input');
 
 if (searchInput) {
@@ -18,9 +18,12 @@ if (searchInput) {
         if (e.key === 'Enter') {
             e.preventDefault();
             const query = searchInput.value.trim();
-            if (query) {
-                window.location.href = 'search.html?q=' + encodeURIComponent(query);
+            if (!query) {
+                showStatusBanner('Please enter a movie title to search.', 'info');
+                searchInput.focus();
+                return;
             }
+            window.location.href = 'search.html?q=' + encodeURIComponent(query);
         }
     });
 }
