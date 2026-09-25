@@ -586,12 +586,14 @@ function showStatusBanner(message, type) {
         banner.id = 'status-banner';
         banner.setAttribute('role', 'status');
         banner.setAttribute('aria-live', 'polite');
+        banner.setAttribute('aria-atomic', 'true');
         document.body.appendChild(banner);
     }
 
     banner.textContent = message;
     banner.className = `status-banner ${type}`;
     banner.classList.remove('hidden');
+    banner.setAttribute('data-state', type);
 
     clearTimeout(showStatusBanner.hideTimer);
     showStatusBanner.hideTimer = setTimeout(function() {

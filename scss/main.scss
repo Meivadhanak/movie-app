@@ -535,9 +535,12 @@ footer {
     top: 0;
     transform: translateX(-50%);
     z-index: 10000;
+    max-width: min(90vw, 420px);
     padding: 10px 16px;
     border-radius: 0 0 8px 8px;
     font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
     color: #fff;
     background: rgba(17, 17, 17, 0.95);
     box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
