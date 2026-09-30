@@ -148,6 +148,7 @@ function createMovieCard(movie, gridId) {
             window.location.href = `movie.html?id=${movie.id}`;
         });
         card.addEventListener('keydown', function(event) {
+            if (event.target !== card) return;
             if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault();
                 window.location.href = `movie.html?id=${movie.id}`;
