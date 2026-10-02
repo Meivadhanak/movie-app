@@ -88,6 +88,7 @@ const FALLBACK_BACKDROP = 'data:image/svg+xml;charset=UTF-8,' + encodeURICompone
 let heroMovies = [];
 let heroIndex = 0;
 let heroRotationTimer = null;
+const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 function getQueryParam(name) {
     const params = new URLSearchParams(window.location.search);
@@ -256,7 +257,7 @@ async function searchMovies(query) {
 }
 
 function startHeroRotation() {
-    if (!heroMovies.length || heroMovies.length < 2) return;
+    if (!heroMovies.length || heroMovies.length < 2 || reducedMotionQuery.matches) return;
     stopHeroRotation();
     heroRotationTimer = window.setInterval(function() {
         heroIndex = (heroIndex + 1) % heroMovies.length;
@@ -318,6 +319,14 @@ function setupHeroControls() {
         hero.addEventListener('focusin', stopHeroRotation);
         hero.addEventListener('focusout', startHeroRotation);
     }
+
+    reducedMotionQuery.addEventListener('change', function(event) {
+        if (event.matches) {
+            stopHeroRotation();
+        } else {
+            startHeroRotation();
+        }
+    });
 
     if (prev) {
         prev.addEventListener('click', function() {
