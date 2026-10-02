@@ -81,7 +81,8 @@ const API_KEY = 'd56d8a35a43ccd732c7924b5e8231823';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const BACKDROP_URL = 'https://image.tmdb.org/t/p/original';
-const COMMIT_DATE = new Date().toISOString().slice(0, 10);
+const localDate = new Date();
+const COMMIT_DATE = [localDate.getFullYear(), String(localDate.getMonth() + 1).padStart(2, '0'), String(localDate.getDate()).padStart(2, '0')].join('-');
 const FALLBACK_IMAGE = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="200" height="300"><rect width="100%" height="100%" fill="#111111"/><text x="50%" y="50%" font-size="20" text-anchor="middle" fill="#ffffff">No Poster</text></svg>');
 const FALLBACK_BACKDROP = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="500"><rect width="100%" height="100%" fill="#111111"/><text x="50%" y="50%" font-size="28" text-anchor="middle" fill="#ffffff">No Backdrop</text></svg>');
 
