@@ -230,6 +230,7 @@ async function searchMovies(query) {
 
     if (!resultsGrid) return;
 
+    resultsGrid.setAttribute('aria-busy', 'true');
     resultsGrid.innerHTML = '<p>Loading...</p>';
 
     try {
@@ -254,6 +255,8 @@ async function searchMovies(query) {
     } catch (error) {
         displayError('Search failed. Please check your connection and try again.', 'search-results');
         console.error('Search fetch failed:', error);
+    } finally {
+        resultsGrid.setAttribute('aria-busy', 'false');
     }
 }
 
