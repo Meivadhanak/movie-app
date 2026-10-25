@@ -9,6 +9,8 @@ if (searchInput) {
     searchInput.setAttribute('spellcheck', 'false');
 
     searchInput.addEventListener('keydown', function(e) {
+        if (e.isComposing) return;
+
         if (e.key === 'Escape') {
             searchInput.value = '';
             searchInput.focus();
